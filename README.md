@@ -7,8 +7,11 @@ platforms.
 
 ## Install
 
-```console
-heroku buildpacks:add --index 1 https://github.com/gaffneyc/heroku-buildpack-jemalloc.git
+```bash
+# Add the buildpack
+heroku buildpacks:add --index 1 https://github.com/thatcleanlife/heroku-buildpack-jemalloc.git
+
+#Deploy
 git push heroku master
 ```
 
@@ -19,7 +22,7 @@ git push heroku master
 Set the JEMALLOC_ENABLED config option to true and jemalloc will be used for
 all commands run inside of your dynos.
 
-```console
+```bash
 heroku config:set JEMALLOC_ENABLED=true
 ```
 
@@ -39,14 +42,14 @@ web: jemalloc.sh bundle exec puma -C config/puma.rb
 
 Set this to true to automatically enable jemalloc.
 
-```console
+```bash
 heroku config:set JEMALLOC_ENABLED=true
 ```
 
 To disable jemalloc set the option to false. This will cause the application to
 restart disabling jemalloc.
 
-```console
+```bash
 heroku config:set JEMALLOC_ENABLED=false
 ```
 
@@ -56,39 +59,33 @@ Set this to select or pin to a specific version of jemalloc. The default is to
 use the latest stable version if this is not set. You will receive an error
 mentioning tar if the version does not exist.
 
-**Default**: `5.0.1`
+**Default**: `5.2.1`
 
 **note:** This setting is only used during slug compilation. Changing it will
 require a code change to be deployed in order to take affect.
 
-```console
-heroku config:set JEMALLOC_VERSION=5.0.1
+```bash
+heroku config:set JEMALLOC_VERSION=5.2.1
 ```
 
 #### Available Versions
 
 | Version |
 | ------- |
-| 3.6.0   |
-| 4.0.4   |
-| 4.1.1   |
-| 4.2.1   |
-| 4.3.1   |
-| 4.4.0   |
-| 4.5.0   |
-| 5.0.1   |
-| 5.1.0   |
+| [5.1.0](https://github.com/jemalloc/jemalloc/releases/tag/5.1.0) |
+| [5.2.0](https://github.com/jemalloc/jemalloc/releases/tag/5.2.0) |
+| [5.2.1](https://github.com/jemalloc/jemalloc/releases/tag/5.2.1) |
 
 The complete and most up to date list of supported versions and stacks is
-available on the [releases page.](https://github.com/gaffneyc/heroku-buildpack-jemalloc/releases)
+available on the [releases page.](https://github.com/thatcleanlife/heroku-buildpack-jemalloc/releases)
 
 ## Building
 
 This uses Docker to build against Heroku
 [stack-image](https://github.com/heroku/stack-images)-like images.
 
-```console
-make VERSION=5.0.1
+```bash
+make VERSION=5.2.1
 ```
 
 Artifacts will be dropped in `dist/` based on Heroku stack and jemalloc version.
@@ -97,13 +94,13 @@ Artifacts will be dropped in `dist/` based on Heroku stack and jemalloc version.
 
 - `make VERSION=X.Y.Z`
 - `open dist`
-- Go to [releases](https://github.com/gaffneyc/heroku-buildpack-jemalloc/releases)
+- Go to [releases](https://github.com/thatcleanlife/heroku-buildpack-jemalloc/releases)
 - Edit the release corresponding to each heroku Stack
 - Drag and drop the new build to attach
 
 ### Creating a New Stack
-- Go to [releases](https://github.com/gaffneyc/heroku-buildpack-jemalloc/releases)
+- Go to [releases](https://github.com/thatcleanlife/heroku-buildpack-jemalloc/releases)
 - Click "Draft a new release"
 - Tag is the name of the Stack (e.g. `heroku-18`)
-- Target is `release-master`
-- Title is `Builds for the [stack] stack`
+- Target is `master`
+- Title is `[stack]`
